@@ -1,9 +1,12 @@
 import { renderUi, list } from './ui';
 import { state } from './state';
+import { getCharacters } from './api';
 
-document.addEventListener('DOMContentLoaded', () => {
+const loadCharacters = async () => {
+  const data = await getCharacters();
+  state.characters = data;
   renderUi();
-});
+};
 
 list.addEventListener('click', (e) => {
   const li = e.target.closest('li');
@@ -16,3 +19,5 @@ list.addEventListener('click', (e) => {
   }
   renderUi();
 });
+
+document.addEventListener('DOMContentLoaded', loadCharacters);
