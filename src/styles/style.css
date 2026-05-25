@@ -1,0 +1,39 @@
+body {
+  background-image: url('https://wallpapers.com/images/hd/marvel-4k-phone-es5yo7w0t0utf7t7.jpg');
+  background-size: cover;
+
+  font-family: 'Oswald', sans-serif;
+  color: aliceblue;
+
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+#app {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.list {
+  display: flex;
+  flex-direction: column;
+
+  padding: 15px 20px;
+  margin: 0;
+}
+button {
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
