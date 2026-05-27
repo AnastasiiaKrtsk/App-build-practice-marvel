@@ -1,19 +1,46 @@
+//ui.js
 import { state } from './state.js';
 export const list = document.querySelector('.list');
 
 export const renderUi = () => {
   list.innerHTML = state.characters
-    .map(
-      (char) =>
-        `
-      <li data-id="${char.id}" class="card">
-        <h3>${char.name}</h3>
-        <p><b>Real name:</b> ${char.realName}</p>
-        <p><b>Power:</b> ${char.power}</p>
+    .map((char) => {
+      const isEditing = state.editedId === char.id;
 
-        <button data-del>Delete</button>
-      </li>
-    `,
-    )
+      return `
+        <li data-id="${char.id}" class="card">
+          ${
+            isEditing
+              ? `
+                <input 
+                  name="name"
+                  value="${char.name}"
+                />
+
+                <input 
+                  name="realName"
+                  value="${char.realName}"
+                />
+
+                <input 
+                  name="power"
+                  value="${char.power}"
+                />
+
+                <button data-save>Save</button>
+                <button data-cancel>Cancel</button>
+              `
+              : `
+                <h3>${char.name}</h3>
+                <p>${char.realName}</p>
+                <p>${char.power}</p>
+                
+                <button data-edit>Edit</button>
+                <button data-del>Delete</button>
+              `
+          }
+        </li>
+      `;
+    })
     .join('');
 };

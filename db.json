@@ -1,7 +1,7 @@
 {
   "characters": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Iron Man",
       "realName": "Tony Stark",
       "universe": "Marvel",
@@ -9,7 +9,7 @@
       "image": "https://i.ibb.co/0jqHpnp/ironman.jpg"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Spider-Man",
       "realName": "Peter Parker",
       "universe": "Marvel",
@@ -17,7 +17,7 @@
       "image": "https://i.ibb.co/2d0dQZx/spiderman.jpg"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Thor",
       "realName": "Thor Odinson",
       "universe": "Marvel",
@@ -25,7 +25,7 @@
       "image": "https://i.ibb.co/Q8zH8D8/thor.jpg"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Hulk",
       "realName": "Bruce Banner",
       "universe": "Marvel",
@@ -33,7 +33,7 @@
       "image": "https://i.ibb.co/fdNmL0D/hulk.jpg"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Doctor Strange",
       "realName": "Stephen Strange",
       "universe": "Marvel",
@@ -41,7 +41,7 @@
       "image": "https://i.ibb.co/Sf1xW3x/drstrange.jpg"
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Black Panther",
       "realName": "T'Challa",
       "universe": "Marvel",
@@ -49,7 +49,7 @@
       "image": "https://i.ibb.co/Yk6bx1S/blackpanther.jpg"
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Scarlet Witch",
       "realName": "Wanda Maximoff",
       "universe": "Marvel",
@@ -57,12 +57,13 @@
       "image": "https://i.ibb.co/x2D8L8x/scarletwitch.jpg"
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "Captain America",
       "realName": "Steve Rogers",
       "universe": "Marvel",
       "power": "Super Soldier",
       "image": "https://i.ibb.co/0rP3d5G/captainamerica.jpg"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

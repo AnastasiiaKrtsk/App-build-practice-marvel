@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 body {
   background-image: url('https://wallpapers.com/images/hd/marvel-4k-phone-es5yo7w0t0utf7t7.jpg');
   background-size: cover;
@@ -13,7 +16,7 @@ li {
   list-style: none;
 }
 #app {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.795);
 }
 .list {
   display: grid;
@@ -37,4 +40,107 @@ button {
 button:hover {
   background: rgba(255, 255, 255, 0.2);
   transform: scale(1.05);
+}
+input {
+  display: flex;
+  flex-wrap: nowrap;
+
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  outline: none;
+  backdrop-filter: blur(6px);
+  font-size: 14px;
+}
+
+input:focus {
+  border-color: #ff3b3b;
+  box-shadow: 0 0 10px rgba(255, 59, 59, 0.5);
+}
+
+.form {
+  width: min(420px, 100%);
+  margin: 0 auto 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  background: rgba(20, 20, 20, 0.95);
+  border: 2px solid #e62429;
+  border-radius: 18px;
+
+  box-shadow:
+    0 0 25px rgba(230, 36, 41, 0.35),
+    0 10px 30px rgba(0, 0, 0, 0.5);
+
+  font-family: Arial, sans-serif;
+}
+
+.form input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid transparent;
+  border-radius: 12px;
+
+  background: #1f1f1f;
+  color: white;
+
+  font-size: 16px;
+  outline: none;
+
+  transition:
+    border-color 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+.form input::placeholder {
+  color: #9b9b9b;
+}
+
+.form input:focus {
+  border-color: #e62429;
+
+  box-shadow: 0 0 12px rgba(230, 36, 41, 0.6);
+
+  transform: translateY(-2px);
+}
+
+.form button {
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+
+  background: linear-gradient(135deg, #e62429, #ff4d4d);
+  color: white;
+
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.25s ease,
+    opacity 0.2s ease;
+}
+
+.form button:hover {
+  transform: scale(1.05);
+
+  box-shadow: 0 8px 20px rgba(230, 36, 41, 0.5);
+}
+
+.form button:active {
+  transform: scale(0.97);
+}
+
+.form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
