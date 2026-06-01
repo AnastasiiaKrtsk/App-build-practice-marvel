@@ -1,8 +1,8 @@
 //api.js
 const BASE_URL = 'http://localhost:3000/characters';
 
-export const getCharacters = async () => {
-  const res = await fetch(BASE_URL);
+export const getCharacters = async (signal) => {
+  const res = await fetch(BASE_URL, { signal });
   if (!res.ok) throw new Error('GET failed');
   return res.json();
 };

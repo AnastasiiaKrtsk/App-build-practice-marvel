@@ -5,6 +5,16 @@ export const state = {
   editedId: null,
 };
 
+export const asyncState = {
+  loading: false,
+  controller: null,
+  requestId: 0,
+
+  deleteLock: new Set(),
+  createLock: false,
+  updateLock: false,
+};
+
 export const setCharactersAction = (data) => {
   state.characters = data;
 };
