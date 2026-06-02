@@ -1,8 +1,12 @@
 //ui.js
 import { state } from './state.js';
 export const list = document.querySelector('.list');
+export const prevBtn = document.querySelector('[data-prev]');
+export const nextBtn = document.querySelector('[data-next]');
+export const loadMore = document.querySelector('[data-more]');
 
-export const renderUi = () => {
+const renderUi = () => {
+  // console.log('CURRENT STATE', state);
   list.innerHTML = state.characters
     .map((char) => {
       const isEditing = state.editedId === char.id;
@@ -43,4 +47,14 @@ export const renderUi = () => {
       `;
     })
     .join('');
+};
+
+const updatePaginationUi = () => {
+  prevBtn.disabled = state.page === 1;
+  nextBtn.disabled = !state.hasMore;
+  loadMore.disabled = !state.hasMore;
+};
+export const syncUI = () => {
+  renderUi();
+  updatePaginationUi();
 };

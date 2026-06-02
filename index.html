@@ -9,6 +9,8 @@
   </head>
   <body>
     <div id="app">
+      <input type="text" class="search" placeholder="Search character..." />
+
       <form action="submit" class="form">
         <input type="text" name="name" placeholder="Name" />
         <input type="text" name="realName" placeholder="Real Name" />
@@ -17,6 +19,13 @@
       </form>
 
       <ul class="list"></ul>
+
+      <div class="pagination">
+        <button data-prev>Prev</button>
+        <button data-next>Next</button>
+      </div>
+
+      <div class="load-more"><button data-more>Load More</button></div>
     </div>
     <script type="module" src="/src/main.js"></script>
   </body>

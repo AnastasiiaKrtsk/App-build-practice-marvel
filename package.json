@@ -10,6 +10,10 @@
     "server": "json-server db.json"
   },
   "devDependencies": {
+    "json-server": "^1.0.0-beta.15",
     "vite": "^8.0.12"
+  },
+  "dependencies": {
+    "lodash": "^4.18.1"
   }
 }

@@ -1,10 +1,20 @@
 //api.js
 const BASE_URL = 'http://localhost:3000/characters';
 
-export const getCharacters = async (signal) => {
-  const res = await fetch(BASE_URL, { signal });
+export const getCharacters = async (page, limit, search, signal) => {
+  const params = new URLSearchParams({ _page: page, _per_page: limit });
+  if (search) {
+    params.append('name', search);
+  }
+
+  const res = await fetch(`${BASE_URL}?${params.toString()}`, { signal });
   if (!res.ok) throw new Error('GET failed');
-  return res.json();
+
+  const json = await res.json();
+  return {
+    data: json.data,
+    hasMore: json.next,
+  };
 };
 
 export const deleteCharacter = async (id) => {
