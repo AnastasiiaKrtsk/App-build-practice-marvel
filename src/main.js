@@ -1,12 +1,18 @@
 //main.js
-import { renderUi, list } from './ui';
+import { syncUI, list, loadMore } from './ui';
 import {
   addCharacterAction,
+  appendCharactersAction,
   asyncState,
   clearEditedId,
   deleteCharacterAction,
+  nextPageAction,
+  prevPageAction,
   setCharactersAction,
   setEditedId,
+  setHasMoreAction,
+  setPageAction,
+  setSearchAction,
   state,
   updateCharacterAction,
 } from './state';
@@ -17,8 +23,13 @@ import {
   createCharacter,
 } from './api';
 
+import debounce from 'lodash/debounce';
+
 const form = document.querySelector('.form');
-const loadCharacters = async () => {
+const pagination = document.querySelector('.pagination');
+const search = document.querySelector('.search');
+
+const loadCharacters = async (append = false) => {
   //*LOADING
   if (asyncState.loading) return;
   asyncState.loading = true;
@@ -32,13 +43,24 @@ const loadCharacters = async () => {
 
   //*TRY CATCH FINALLY
   try {
-    const data = await getCharacters(asyncState.controller.signal);
+    const { data, hasMore } = await getCharacters(
+      state.page,
+      state.limit,
+      state.search,
+      asyncState.controller.signal,
+    );
 
     //*REQUEST CHECK
     if (asyncState.requestId !== currentRequestId) return;
 
-    setCharactersAction(data);
-    renderUi();
+    if (append) {
+      appendCharactersAction(data);
+    } else {
+      setCharactersAction(data);
+    }
+    setHasMoreAction(hasMore);
+
+    syncUI();
   } catch (error) {
     if (error.name === 'AbortError') return;
   } finally {
@@ -59,7 +81,7 @@ const handleListClick = async (e) => {
     try {
       await deleteCharacter(id);
       deleteCharacterAction(id);
-      renderUi();
+      syncUI();
     } catch (error) {
       console.error(err);
     } finally {
@@ -69,7 +91,7 @@ const handleListClick = async (e) => {
 
   if (e.target.closest('[data-edit]')) {
     setEditedId(id);
-    renderUi();
+    syncUI();
     return;
   }
   if (e.target.closest('[data-save]')) {
@@ -91,7 +113,7 @@ const handleListClick = async (e) => {
       const update = await updateCharacter(id, updatedCharacter);
       updateCharacterAction(id, updatedCharacter);
       clearEditedId();
-      renderUi();
+      syncUI();
     } catch (error) {
       console.error(err);
     } finally {
@@ -100,7 +122,7 @@ const handleListClick = async (e) => {
   }
   if (e.target.closest('[data-cancel]')) {
     clearEditedId();
-    renderUi();
+    syncUI();
     return;
   }
 };
@@ -126,7 +148,7 @@ const handleFormSubmit = async (e) => {
 
     const created = await createCharacter(newChar);
     addCharacterAction(created);
-    renderUi();
+    await loadCharacters();
 
     form.reset();
   } catch (err) {
@@ -136,6 +158,34 @@ const handleFormSubmit = async (e) => {
   }
 };
 
+const handlePaginationClick = async (e) => {
+  if (e.target.closest('[data-prev]')) {
+    prevPageAction();
+    await loadCharacters();
+  }
+
+  if (e.target.closest('[data-next]')) {
+    nextPageAction();
+    await loadCharacters();
+  }
+};
+
+const handleSearchInput = debounce(async (e) => {
+  const value = e.target.value.trim();
+
+  setSearchAction(value);
+  setPageAction(1);
+  await loadCharacters();
+}, 500);
+
+const handleLoadMoreClick = async () => {
+  nextPageAction();
+  await loadCharacters(true);
+};
+
+loadMore.addEventListener('click', handleLoadMoreClick);
+search.addEventListener('input', handleSearchInput);
+pagination.addEventListener('click', handlePaginationClick);
 form.addEventListener('submit', handleFormSubmit);
 list.addEventListener('click', handleListClick);
 document.addEventListener('DOMContentLoaded', loadCharacters);
